@@ -325,9 +325,9 @@ namespace Reto2
             // pictureBox1
             // 
             this.pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Universidad_EAN_logo.sv" + "g/2560px-Universidad_EAN_logo.svg.png";
-            this.pictureBox1.Location = new System.Drawing.Point(712, 36);
+            this.pictureBox1.Location = new System.Drawing.Point(679, 36);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(151, 79);
+            this.pictureBox1.Size = new System.Drawing.Size(184, 79);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
