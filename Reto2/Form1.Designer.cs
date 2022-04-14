@@ -1,4 +1,7 @@
-﻿namespace Reto2
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Reto2
 {
     partial class Form1
     {
@@ -29,12 +32,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCantidad = new System.Windows.Forms.NumericUpDown();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAutor = new System.Windows.Forms.TextBox();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtEditorial = new System.Windows.Forms.TextBox();
             this.txtTitulo = new System.Windows.Forms.TextBox();
@@ -43,7 +45,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.titulo = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,20 +60,22 @@
             this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.txtCantidad)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCantidad);
             this.groupBox1.Controls.Add(this.txtCodigo);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtAutor);
-            this.groupBox1.Controls.Add(this.txtCantidad);
             this.groupBox1.Controls.Add(this.txtPrecio);
             this.groupBox1.Controls.Add(this.txtEditorial);
             this.groupBox1.Controls.Add(this.txtTitulo);
@@ -82,12 +85,20 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.titulo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 170);
+            this.groupBox1.Location = new System.Drawing.Point(12, 121);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(857, 149);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Añadir Libros";
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(626, 94);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(96, 26);
+            this.txtCantidad.TabIndex = 12;
+            this.txtCantidad.Value = new decimal(new int[] {1, 0, 0, 0});
             // 
             // txtCodigo
             // 
@@ -113,19 +124,13 @@
             this.txtAutor.Size = new System.Drawing.Size(173, 26);
             this.txtAutor.TabIndex = 9;
             // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(626, 94);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(173, 26);
-            this.txtCantidad.TabIndex = 8;
-            // 
             // txtPrecio
             // 
             this.txtPrecio.Location = new System.Drawing.Point(626, 32);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(173, 26);
             this.txtPrecio.TabIndex = 7;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             // 
             // txtEditorial
             // 
@@ -186,20 +191,11 @@
             this.titulo.TabIndex = 0;
             this.titulo.Text = "Título:";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.InitialImage = ((System.Drawing.Image) (resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(730, 73);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(139, 91);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // label5
             // 
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label5.Location = new System.Drawing.Point(12, 73);
+            this.label5.Location = new System.Drawing.Point(12, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(169, 35);
             this.label5.TabIndex = 2;
@@ -208,7 +204,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label6.Location = new System.Drawing.Point(12, 108);
+            this.label6.Location = new System.Drawing.Point(12, 59);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(253, 28);
             this.label6.TabIndex = 3;
@@ -217,7 +213,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label7.Location = new System.Drawing.Point(12, 136);
+            this.label7.Location = new System.Drawing.Point(12, 87);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(305, 36);
             this.label7.TabIndex = 4;
@@ -228,7 +224,7 @@
             this.groupBox2.Controls.Add(this.txtBuscar);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 325);
+            this.groupBox2.Location = new System.Drawing.Point(12, 276);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(857, 86);
             this.groupBox2.TabIndex = 10;
@@ -256,9 +252,9 @@
             // 
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 417);
+            this.groupBox3.Location = new System.Drawing.Point(12, 368);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(857, 259);
+            this.groupBox3.Size = new System.Drawing.Size(857, 305);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Libros";
@@ -268,10 +264,12 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 28);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 22);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(845, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(851, 280);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -324,17 +322,27 @@
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Universidad_EAN_logo.sv" + "g/2560px-Universidad_EAN_logo.svg.png";
+            this.pictureBox1.Location = new System.Drawing.Point(712, 36);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(151, 79);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 734);
+            this.ClientSize = new System.Drawing.Size(881, 679);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -343,16 +351,21 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.txtCantidad)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.PictureBox pictureBox1;
+
+        private System.Windows.Forms.NumericUpDown txtCantidad;
 
         private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
 
@@ -379,13 +392,10 @@
 
         private System.Windows.Forms.Label label5;
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.TextBox txtEditorial;
         private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.TextBox txtAutor;
 
         private System.Windows.Forms.Label label2;

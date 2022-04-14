@@ -8,8 +8,7 @@ namespace Capa_Datos
 {
     public class ClaseDatos
     {
-        SqlConnection Connection =
-            new SqlConnection(ConfigurationManager.ConnectionStrings["sql"].ConnectionString);
+        SqlConnection Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sql"].ConnectionString);
 
         public DataTable ListarLibrosDataTable()
         {
@@ -24,7 +23,7 @@ namespace Capa_Datos
         {
             var sqlCommand = new SqlCommand("buscar_libros", Connection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@nombre", miLibro.Titulo);
+            sqlCommand.Parameters.AddWithValue("@titulo", miLibro.Titulo);
             var sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             var dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
@@ -43,7 +42,7 @@ namespace Capa_Datos
             sqlCommand.Parameters.AddWithValue("@precio", miLibro.Precio);
             sqlCommand.Parameters.AddWithValue("@cantidad", miLibro.Cantidad);
             sqlCommand.Parameters.Add("@accion", SqlDbType.VarChar, 50).Value = miLibro.Accion;
-            sqlCommand.Parameters["accion"].Direction = ParameterDirection.InputOutput;
+            sqlCommand.Parameters["@accion"].Direction = ParameterDirection.InputOutput;
             if (Connection.State == ConnectionState.Open)
             {
                 Connection.Close();

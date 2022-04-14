@@ -10,7 +10,7 @@ namespace Capa_Entidad
         public string Editorial { get; set; }
         public float Precio { get; set; }
         public int Cantidad { get; set; }
-        public int Accion { get; set; }
+        public string Accion { get; set; }
 
     }
 }

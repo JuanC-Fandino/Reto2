@@ -18,12 +18,13 @@ namespace Reto2
 
         private void Mantenimiento(string accion)
         {
-            miLibro.Codigo = Convert.ToInt32(txtCodigo.Text);
+            miLibro.Codigo = !string.IsNullOrEmpty(txtCodigo.Text) ? Convert.ToInt32(txtCodigo.Text) : 0;
             miLibro.Titulo = txtTitulo.Text;
             miLibro.Autor = txtAutor.Text;
             miLibro.Editorial = txtEditorial.Text;
             miLibro.Precio = Convert.ToSingle(txtPrecio.Text);
-            miLibro.Cantidad = Convert.ToInt32(txtCantidad.Text);
+            miLibro.Cantidad = (int) txtCantidad.Value;
+            miLibro.Accion = accion;
             var mensaje = _claseNegocio.MantenimientoLibros(miLibro);
             MessageBox.Show(mensaje, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -35,8 +36,8 @@ namespace Reto2
             txtAutor.Text = "";
             txtEditorial.Text = "";
             txtPrecio.Text = "";
-            txtCantidad.Text = "";
-            _claseNegocio.ListarLibros();
+            txtCantidad.Value = 1;
+            dataGridView1.DataSource = _claseNegocio.ListarLibros();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,8 +52,22 @@ namespace Reto2
 
         private void registrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtCodigo.Text)) return;
-            if (MessageBox.Show("¿Deseas añadir " + txtTitulo.Text + '?', "Mensaje", MessageBoxButtons.YesNo,
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                MessageBox.Show("El codigo debe estar vacío!", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(txtTitulo.Text) || string.IsNullOrEmpty(txtAutor.Text) ||
+                string.IsNullOrEmpty(txtEditorial.Text) || string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                MessageBox.Show("Existen campos vacíos!", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            
+            if (MessageBox.Show("¿Deseas añadir '" + txtTitulo.Text + "'?", "Mensaje", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) != System.Windows.Forms.DialogResult.Yes) return;
             Mantenimiento("1");
             Limpiar();
@@ -60,8 +75,13 @@ namespace Reto2
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodigo.Text)) return;
-            if (MessageBox.Show("¿Deseas modificar " + txtTitulo.Text + '?', "Mensaje", MessageBoxButtons.YesNo,
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                MessageBox.Show("El código no puede estar vacio!", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            if (MessageBox.Show("¿Deseas modificar '" + txtTitulo.Text + "'?", "Mensaje", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) != System.Windows.Forms.DialogResult.Yes) return;
             Mantenimiento("2");
             Limpiar();
@@ -69,8 +89,13 @@ namespace Reto2
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodigo.Text)) return;
-            if (MessageBox.Show("¿Deseas eliminar " + txtTitulo.Text + '?', "Mensaje", MessageBoxButtons.YesNo,
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                MessageBox.Show("El código no puede estar vacio", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            if (MessageBox.Show("¿Deseas eliminar '" + txtTitulo.Text + "'?", "Mensaje", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information) != System.Windows.Forms.DialogResult.Yes) return;
             Mantenimiento("3");
             Limpiar();
@@ -80,7 +105,7 @@ namespace Reto2
         {
             if (!string.IsNullOrEmpty(txtBuscar.Text))
             {
-                miLibro.Titulo = txtTitulo.Text;
+                miLibro.Titulo = txtBuscar.Text;
                 var dataTable = new DataTable();
                 dataTable = _claseNegocio.BuscarLibro(miLibro);
                 dataGridView1.DataSource = dataTable;
@@ -99,7 +124,17 @@ namespace Reto2
             txtAutor.Text = dataGridView1[2, fila].Value.ToString();
             txtEditorial.Text = dataGridView1[3, fila].Value.ToString();
             txtPrecio.Text = dataGridView1[4, fila].Value.ToString();
-            txtCantidad.Text = dataGridView1[5, fila].Value.ToString();
+            txtCantidad.Value = decimal.Parse(dataGridView1[5, fila].Value.ToString());
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPrecio.Text)) return;
+            if (float.TryParse(txtPrecio.Text, out _)) return;
+            MessageBox.Show("El valor ingresado debe ser de tipo numérico (use ',' para denotar decimales)!", "Mensaje", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            txtPrecio.Text = "";
+
         }
         
     }
